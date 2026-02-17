@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animated Solar System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Import Three.js and OrbitControls from CDN -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-text">Loading Solar System...</div>
+            <div class="loader-progress">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Panel -->
+    <div id="info-panel" class="hidden">
+        <div class="panel-header">
+            <h2 id="planet-name">Planet Name</h2>
+            <button id="close-panel">&times;</button>
+        </div>
+        <div class="panel-content">
+            <div class="info-row">
+                <span class="info-label">Diameter:</span>
+                <span id="info-diameter" class="info-value">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Distance from Sun:</span>
+                <span id="info-distance" class="info-value">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Orbital Period:</span>
+                <span id="info-orbital" class="info-value">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Day Length:</span>
+                <span id="info-day" class="info-value">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Temperature:</span>
+                <span id="info-temp" class="info-value">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Moons:</span>
+                <span id="info-moons" class="info-value">-</span>
+            </div>
+            <div class="info-description">
+                <p id="info-desc">-</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <div id="controls-panel">
+        <h3>🌌 Solar System Controls</h3>
+        <div class="control-group">
+            <label>Orbit Speed:</label>
+            <input type="range" id="orbit-speed" min="0" max="5" step="0.1" value="1">
+            <span id="orbit-speed-value">1x</span>
+        </div>
+        <div class="control-group">
+            <label>Rotation Speed:</label>
+            <input type="range" id="rotation-speed" min="0" max="5" step="0.1" value="1">
+            <span id="rotation-speed-value">1x</span>
+        </div>
+        <div class="control-group">
+            <label>Show Orbits:</label>
+            <input type="checkbox" id="show-orbits" checked>
+        </div>
+        <div class="control-group">
+            <label>Show Labels:</label>
+            <input type="checkbox" id="show-labels" checked>
+        </div>
+        <div class="control-group">
+            <label>Solar Flares:</label>
+            <input type="checkbox" id="show-flares" checked>
+        </div>
+        <div class="control-group">
+            <label>Shooting Stars:</label>
+            <input type="checkbox" id="show-shooting-stars" checked>
+        </div>
+        <div class="control-group">
+            <label>Cosmic Rays:</label>
+            <input type="checkbox" id="show-cosmic-rays" checked>
+        </div>
+        <div class="control-buttons">
+            <button id="reset-camera">Reset Camera</button>
+            <button id="toggle-fullscreen">Fullscreen</button>
+        </div>
+    </div>
+
+    <!-- Planet Selection Bar -->
+    <div id="planet-bar">
+        <div class="planet-btn" data-planet="sun" title="Sun">☀️</div>
+        <div class="planet-btn" data-planet="mercury" title="Mercury">⚫</div>
+        <div class="planet-btn" data-planet="venus" title="Venus">🟡</div>
+        <div class="planet-btn" data-planet="earth" title="Earth">🌍</div>
+        <div class="planet-btn" data-planet="mars" title="Mars">🔴</div>
+        <div class="planet-btn" data-planet="jupiter" title="Jupiter">🟤</div>
+        <div class="planet-btn" data-planet="saturn" title="Saturn">🪐</div>
+        <div class="planet-btn" data-planet="uranus" title="Uranus">🔵</div>
+        <div class="planet-btn" data-planet="neptune" title="Neptune">💙</div>
+    </div>
+
+    <!-- Instructions -->
+    <div id="instructions">
+        <p>🖱️ Left-click + drag: Rotate | Right-click + drag: Pan | Scroll: Zoom</p>
+        <p>Click on planets for info or use the buttons below</p>
+    </div>
+
+    <!-- Main Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Three.js Scene Script -->
+    <script type="module" src="{{ url_for('static', filename='js/solar_system.js') }}"></script>
+</body>
+</html>
